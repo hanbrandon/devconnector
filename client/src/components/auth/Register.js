@@ -2,9 +2,10 @@ import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, register }) => {
   // formData = It is state object that store form data
   // setFormData = function that we use update state
   const [formData, setFromData] = useState({
@@ -24,7 +25,11 @@ const Register = ({ setAlert }) => {
     if (password !== password2) {
       setAlert('passwords do not match', 'danger');
     } else {
-      console.log('SUCCESS');
+      register({
+        name,
+        email,
+        password
+      });
     }
   };
   return (
@@ -90,12 +95,13 @@ const Register = ({ setAlert }) => {
 };
 
 Register.propTypes = {
-  setAlert: PropTypes.func.isRequired
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired
 };
 
 export default connect(
   null,
-  { setAlert }
+  { setAlert, register }
 )(Register);
 
 /* Whenever you bring in an action when you want to use it, 
