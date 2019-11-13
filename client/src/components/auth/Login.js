@@ -1,15 +1,15 @@
-import React, { Fragment, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { login } from "../../actions/auth";
+import React, { Fragment, useState } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { login } from '../../actions/auth';
 
 const Login = ({ login, isAuthenticated }) => {
   // formData = It is state object that store form data
   // setFormData = function that we use update state
   const [formData, setFromData] = useState({
-    email: "",
-    password: ""
+    email: '',
+    password: ''
   }); //initial states
 
   const { email, password } = formData;

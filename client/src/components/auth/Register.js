@@ -1,18 +1,18 @@
-import React, { Fragment, useState } from "react";
-import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
-import { setAlert } from "../../actions/alert";
-import { register } from "../../actions/auth";
-import PropTypes from "prop-types";
+import React, { Fragment, useState } from 'react';
+import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
+import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
+import PropTypes from 'prop-types';
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   // formData = It is state object that store form data
   // setFormData = function that we use update state
   const [formData, setFromData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    password2: ""
+    name: '',
+    email: '',
+    password: '',
+    password2: ''
   }); //initial states
 
   const { name, email, password, password2 } = formData;
@@ -23,7 +23,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
-      setAlert("passwords do not match", "danger");
+      setAlert('passwords do not match', 'danger');
     } else {
       register({
         name,
