@@ -3,10 +3,16 @@
 import { REGISTER_SUCCESS, REGISTER_FAIL } from '../actions/types';
 
 //CREATE INITIAL STATE
-const initialState = {
+/* const initialState = {
 	token: localStorage.getItem('token'), // WE STORE TOKEN ON LOCAL STORAGE,
 	isAuthenticated: null, // IF USER REGISTER OR LOGIN SUCCESS, IT WOULD BE 'TRUE'
 	loading: true, // WHEN USER GET DATA COMPLETELY, IT WOULD BE FALSE,
+	user: null
+}; */
+const initialState = {
+	token: localStorage.getItem('token'),
+	isAuthenticated: null,
+	loading: true,
 	user: null
 };
 
