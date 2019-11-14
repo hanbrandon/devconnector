@@ -1,70 +1,56 @@
 // STEP 2. CREATE REDUCERS
 // IMPORT ACTION TYPES
 import {
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
-  USER_LOADED,
-  AUTH_ERROR,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT
-} from "../actions/types";
+	REGISTER_SUCCESS,
+	REGISTER_FAIL,
+	USER_LOADED,
+	AUTH_ERROR,
+	LOGIN_SUCCESS,
+	LOGIN_FAIL,
+	LOGOUT
+} from '../actions/types';
 
 //CREATE INITIAL STATE
-<<<<<<< HEAD
-/* const initialState = {
+const initialState = {
 	token: localStorage.getItem('token'), // WE STORE TOKEN ON LOCAL STORAGE,
 	isAuthenticated: null, // IF USER REGISTER OR LOGIN SUCCESS, IT WOULD BE 'TRUE'
 	loading: true, // WHEN USER GET DATA COMPLETELY, IT WOULD BE FALSE,
 	user: null
-}; */
-const initialState = {
-	token: localStorage.getItem('token'),
-	isAuthenticated: null,
-	loading: true,
-	user: null
-=======
-const initialState = {
-  token: localStorage.getItem("token"), // WE STORE TOKEN ON LOCAL STORAGE,
-  isAuthenticated: null, // IF USER REGISTER OR LOGIN SUCCESS, IT WOULD BE 'TRUE'
-  loading: true, // WHEN USER GET DATA COMPLETELY, IT WOULD BE FALSE,
-  user: null
->>>>>>> 2e65c57738140468fc9618aae08d2c03b18f5924
 };
 
 export default function(state = initialState, action) {
-  //IT TAKES TWO PARAMETERS, STATE & ACTION
-  const { type, payload } = action;
+	//IT TAKES TWO PARAMETERS, STATE & ACTION
+	const { type, payload } = action;
 
-  switch (type) {
-    case USER_LOADED:
-      return {
-        ...state,
-        isAuthenticated: true,
-        loading: false,
-        user: payload
-      };
-    case REGISTER_SUCCESS:
-    case LOGIN_SUCCESS:
-      localStorage.setItem("token", payload.token);
-      return {
-        ...state,
-        ...payload,
-        isAuthenticated: true,
-        loading: false
-      };
-    case REGISTER_FAIL:
-    case AUTH_ERROR:
-    case LOGIN_FAIL:
-    case LOGOUT:
-      localStorage.removeItem("token");
-      return {
-        ...state,
-        token: null,
-        isAuthenticated: false,
-        loading: false
-      };
-    default:
-      return state;
-  }
+	switch (type) {
+		case USER_LOADED:
+			return {
+				...state,
+				isAuthenticated: true,
+				loading: false,
+				user: payload
+			};
+		case REGISTER_SUCCESS:
+		case LOGIN_SUCCESS:
+			localStorage.setItem('token', payload.token);
+			return {
+				...state,
+				...payload,
+				isAuthenticated: true,
+				loading: false
+			};
+		case REGISTER_FAIL:
+		case AUTH_ERROR:
+		case LOGIN_FAIL:
+		case LOGOUT:
+			localStorage.removeItem('token');
+			return {
+				...state,
+				token: null,
+				isAuthenticated: false,
+				loading: false
+			};
+		default:
+			return state;
+	}
 }
