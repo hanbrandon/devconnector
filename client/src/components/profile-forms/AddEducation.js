@@ -75,12 +75,12 @@ const AddEducation = ({ addEducation, history }) => {
 							name='current'
 							checked={current}
 							value={current}
-							onChange={(e) => {
+							onChange={() => {
 								setFormData({ ...formData, current: !current });
 								toggleDisabled(!toDateDisabled);
 							}}
 						/>{' '}
-						Current Job
+						Current School
 					</p>
 				</div>
 				<div className='form-group'>
@@ -96,11 +96,11 @@ const AddEducation = ({ addEducation, history }) => {
 				<div className='form-group'>
 					<textarea
 						name='description'
-						value={description}
-						onChange={(e) => onChange(e)}
 						cols='30'
 						rows='5'
 						placeholder='Program Description'
+						value={description}
+						onChange={(e) => onChange(e)}
 					/>
 				</div>
 				<input type='submit' className='btn btn-primary my-1' />
