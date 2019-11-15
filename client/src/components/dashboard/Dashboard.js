@@ -7,9 +7,12 @@ import DashboardActions from './DashboardActions';
 import { getCurrentProfile } from '../../actions/profile';
 
 const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, loading } }) => {
-	useEffect(() => {
-		getCurrentProfile();
-	}, []);
+	useEffect(
+		() => {
+			getCurrentProfile();
+		},
+		[ getCurrentProfile ]
+	);
 
 	return loading && profile === null ? (
 		<Spinner />
@@ -33,7 +36,6 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
 			)}
 		</Fragment>
 	);
-	return <div>Dashboard</div>;
 };
 
 Dashboard.propTypes = {
