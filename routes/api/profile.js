@@ -21,7 +21,9 @@ router.get('/me', auth, async (req, res) => {
 
 		if (!profile) {
 			console.log('profile not found');
-			return res.status(400).json({ msg: 'There is no profile for this user' });
+			return res
+				.status(400)
+				.json({ msg: 'There is no profile for this user' });
 		}
 
 		res.json(profile);
@@ -38,7 +40,10 @@ router.post(
 	'/',
 	[
 		auth,
-		[ check('status', 'Status is required').not().isEmpty(), check('skills', 'Skills is required').not().isEmpty() ]
+		[
+			check('status', 'Status is required').not().isEmpty(),
+			check('skills', 'Skills is required').not().isEmpty()
+		]
 	],
 	async (req, res) => {
 		const errors = validationResult(req);
@@ -71,7 +76,9 @@ router.post(
 		if (status) profileFields.status = status;
 		if (githubusername) profileFields.githubusername = githubusername;
 		if (skills) {
-			profileFields.skills = skills.split(',').map((skill) => skill.trim());
+			profileFields.skills = skills
+				.split(',')
+				.map((skill) => skill.trim());
 		}
 
 		// Build social object
@@ -87,7 +94,11 @@ router.post(
 
 			if (profile) {
 				// Update
-				profile = await Profile.findOneAndUpdate({ user: req.user.id }, { $set: profileFields }, { new: true });
+				profile = await Profile.findOneAndUpdate(
+					{ user: req.user.id },
+					{ $set: profileFields },
+					{ new: true }
+				);
 
 				return res.json(profile);
 			}
@@ -109,7 +120,10 @@ router.post(
 // @access  Public
 router.get('/', async (req, res) => {
 	try {
-		const profiles = await Profile.find().populate('user', [ 'name', 'avatar' ]);
+		const profiles = await Profile.find().populate('user', [
+			'name',
+			'avatar'
+		]);
 		res.json(profiles);
 	} catch (error) {
 		console.error(err.message);
@@ -121,14 +135,16 @@ router.get('/', async (req, res) => {
 // @desc    Get profile by user ID
 // @access  Public
 router.get('/user/:user_id', async (req, res) => {
+	console.log(req.body);
 	try {
 		const profile = await Profile.findOne({
 			user: req.params.user_id
 		}).populate('user', [ 'name', 'avatar' ]);
-		res.json(profile);
 
 		if (!profile) return res.status(400).json({ msg: 'Profile not found' });
-	} catch (error) {
+
+		res.json(profile);
+	} catch (err) {
 		console.error(err.message);
 		if (err.kind == 'ObjectId') {
 			return res.status(400).json({ msg: 'Profile not found' });
@@ -175,7 +191,15 @@ router.put(
 			return res.status(400).json({ errors: errors.array() });
 		}
 
-		const { title, company, location, from, to, current, description } = req.body;
+		const {
+			title,
+			company,
+			location,
+			from,
+			to,
+			current,
+			description
+		} = req.body;
 
 		const newExp = {
 			title,
@@ -211,7 +235,9 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
 		const profile = await Profile.findOne({ user: req.user.id });
 
 		// Get remove index
-		const removeIndex = profile.experience.map((item) => item.id).indexOf(req.params.exp_id);
+		const removeIndex = profile.experience
+			.map((item) => item.id)
+			.indexOf(req.params.exp_id);
 
 		profile.experience.splice(removeIndex, 1);
 
@@ -244,7 +270,15 @@ router.put(
 			return res.status(400).json({ errors: errors.array() });
 		}
 
-		const { school, degree, fieldofstudy, from, to, current, description } = req.body;
+		const {
+			school,
+			degree,
+			fieldofstudy,
+			from,
+			to,
+			current,
+			description
+		} = req.body;
 
 		const newEdu = {
 			school,
@@ -280,7 +314,9 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
 		const profile = await Profile.findOne({ user: req.user.id });
 
 		// Get remove index
-		const removeIndex = profile.education.map((item) => item.id).indexOf(req.params.edu_id);
+		const removeIndex = profile.education
+			.map((item) => item.id)
+			.indexOf(req.params.edu_id);
 
 		profile.education.splice(removeIndex, 1);
 
