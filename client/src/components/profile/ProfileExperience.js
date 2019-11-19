@@ -20,6 +20,6 @@ const ProfileExperience = ({
 	</div>
 );
 
-ProfileExperience.propTypes = { experience: PropTypes.array.isRequired };
+ProfileExperience.propTypes = { experience: PropTypes.object.isRequired };
 
 export default ProfileExperience;

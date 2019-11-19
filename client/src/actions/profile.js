@@ -55,7 +55,6 @@ export const getProfiles = () => async (dispatch) => {
 
 // Get profile by ID
 export const getProfileById = (userId) => async (dispatch) => {
-	console.log(userId);
 	try {
 		const res = await axios.get(`/api/profile/user/${userId}`);
 		dispatch({
@@ -172,7 +171,6 @@ export const addExperience = (formData, history) => async (dispatch) => {
 
 // Add Education
 export const addEducation = (formData, history) => async (dispatch) => {
-	console.log(formData);
 	try {
 		const config = {
 			headers: {
